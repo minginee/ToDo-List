@@ -153,73 +153,43 @@ function selectDate(dateStr) {
 
 
 // Add a new task
-
 function addTask() {
-
     const taskText = taskInput.value.trim();
-
     const taskTime = timeInput.value;
 
-
-
-    // Validate input
-
+    // 1. 입력 검증
     if (taskText === '') {
-
         alert('Please enter a task!');
-
         return;
-
     }
 
-
-
-    // Create task object
-
+    // 2. 태스크 객체 생성
     const task = {
-
         id: Date.now(),
-
         text: taskText,
-
         date: selectedDate,
-
         time: taskTime,
-
         completed: false
-
     };
 
+    // 3. 화면에서 "No tasks for this day" 메시지 제거 (목록이 비어있을 경우)
+    const emptyMsg = taskList.querySelector('.empty-message');
+    if (emptyMsg && emptyMsg.parentNode) {
+        taskList.innerHTML = '';
+    }
 
+    // 4. 화면에 즉시 추가 (중요!)
+    // 기존에 에러가 나던 renderTasks() 대신 실제 존재하는 renderTask(task)를 사용합니다.
+    renderTask(task);
 
-    // Save task to localStorage
-
+    // 5. 현재 화면 상태를 localStorage에 저장
+    // 팁: 현재 로직은 화면에 그려진 요소를 읽어서 저장하므로 renderTask 다음에 실행해야 합니다.
     saveTasks(); 
 
-
-
-    // 1. 입력창 초기화
-
+    // 6. 입력창 초기화 및 포커스
     taskInput.value = '';
-
     timeInput.value = '';
-
-
-
-    // 2. 화면 업데이트 함수 호출 (중요!)
-
-    renderTasks();
-
-
-
-    // Clear input fields
-
-    taskInput.value = '';
-
-    timeInput.value = '';
-
     taskInput.focus();
-
 }
 
 
