@@ -1,3 +1,4 @@
+alert("자바스크립트 연결 확인!");
 // Get DOM elements
 const taskInput = document.getElementById('taskInput');
 const timeInput = document.getElementById('timeInput');
