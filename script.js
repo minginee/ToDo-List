@@ -78,14 +78,42 @@ function selectDate(dateStr) {
 
 // Add a new task
 function addTask() {
+    const taskInput = document.getElementById('taskInput'); // 함수 안에서 다시 한번 확인
     const taskText = taskInput.value.trim();
     const taskTime = timeInput.value;
 
-    // Validate input
+    // 1. 입력 검증
     if (taskText === '') {
         alert('Please enter a task!');
         return;
     }
+
+    // 2. 태스크 객체 생성
+    const task = {
+        id: Date.now(),
+        text: taskText,
+        date: selectedDate,
+        time: taskTime,
+        completed: false
+    };
+
+    // 3. 화면에서 "No tasks for this day" 메시지 제거 (목록이 비어있을 경우)
+    const emptyMsg = taskList.querySelector('.empty-message');
+    if (emptyMsg) {
+        taskList.innerHTML = '';
+    }
+
+    // 4. 화면에 즉시 추가 (중요!)
+    renderTask(task);
+
+    // 5. 현재 화면 상태를 localStorage에 저장
+    saveTasks(); 
+
+    // 6. 입력창 초기화 및 포커스
+    taskInput.value = '';
+    timeInput.value = '';
+    taskInput.focus();
+}
 
     // Create task object
     const task = {
