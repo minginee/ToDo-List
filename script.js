@@ -178,12 +178,11 @@ function addTask() {
         taskList.innerHTML = '';
     }
 
-    // 4. 화면에 즉시 추가 (중요!)
-    // 기존에 에러가 나던 renderTasks() 대신 실제 존재하는 renderTask(task)를 사용합니다.
-    renderTask(task);
+    // 4. 화면에 즉시 추가
+    // renderTasks(); 대신 아래 함수 중 하나를 사용해야 합니다.
+    renderTask(task); 
 
     // 5. 현재 화면 상태를 localStorage에 저장
-    // 팁: 현재 로직은 화면에 그려진 요소를 읽어서 저장하므로 renderTask 다음에 실행해야 합니다.
     saveTasks(); 
 
     // 6. 입력창 초기화 및 포커스
