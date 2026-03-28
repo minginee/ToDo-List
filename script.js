@@ -97,10 +97,14 @@ function addTask() {
     };
 
     // Save task to localStorage
-    saveTasks();
+    saveTasks(); 
 
-    // Re-render list now that task state changed (ensures sorting works instantly)
-    renderAllTasks();
+    // 1. 입력창 초기화
+    taskInput.value = '';
+    timeInput.value = '';
+
+    // 2. 화면 업데이트 함수 호출 (중요!)
+    renderTasks();
 
     // Clear input fields
     taskInput.value = '';
